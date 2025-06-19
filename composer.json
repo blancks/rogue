@@ -1,0 +1,35 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Rogue\\App\\": "app/",
+            "Rogue\\Mantle\\": "mantle/",
+            "Rogue\\Mask\\": "mask/",
+            "Rogue\\Plugin\\": "plugin/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rogue\\Test\\": "test/"
+        }
+    },
+    "scripts": {
+        "prettify": "php-cs-fixer fix --config ./config/php-cs-fixer/.php-cs-fixer.dist.php --cache-file ./storage/cache/.php-cs-fixer.cache",
+        "analyse": " phpstan analyse mantle mask public --level max",
+        "serve": "php -S 127.0.0.1:80 ./mantle/dev/builtin-webserver-router.php",
+        "test": "phpunit --bootstrap ./mantle/bootstrap.php --colors=always test",
+        "test-detailed": "phpunit --bootstrap ./mantle/bootstrap.php --testdox --colors=always test"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12",
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "tracy/tracy": "^2.10"
+    },
+    "require": {
+        "psr/http-message": "^2.0",
+        "psr/http-server-middleware": "^1.0",
+        "psr/log": "^3.0",
+        "guzzlehttp/guzzle": "^7.9",
+        "monolog/monolog": "^3.9"
+    }
+}

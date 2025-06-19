@@ -1,0 +1,110 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Rogue\Mantle\Contracts;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+
+/**
+ * Interface RouterInterface
+ *
+ * Defines the contract for HTTP routing.
+ */
+interface RouterInterface
+{
+    /**
+     * Add a middleware to the global middleware stack.
+     *
+     * @param MiddlewareInterface $middleware The middleware to add.
+     * @return void
+     */
+    public function addMiddleware(MiddlewareInterface $middleware): void;
+
+    /**
+     * Register a GET route.
+     *
+     * @param string $uri
+     * @param string|string[] $action
+     * @return void
+     */
+    public function get(string $uri, array|string $action): void;
+
+    /**
+     * Register a POST route.
+     *
+     * @param string $uri
+     * @param string|string[] $action
+     * @return void
+     */
+    public function post(string $uri, array|string $action): void;
+
+    /**
+     * Register a PUT route.
+     *
+     * @param string $uri
+     * @param string|string[] $action
+     * @return void
+     */
+    public function put(string $uri, array|string $action): void;
+
+    /**
+     * Register a PATCH route.
+     *
+     * @param string $uri
+     * @param string|string[] $action
+     * @return void
+     */
+    public function patch(string $uri, array|string $action): void;
+
+    /**
+     * Register a DELETE route.
+     *
+     * @param string $uri
+     * @param string|string[] $action
+     * @return void
+     */
+    public function delete(string $uri, array|string $action): void;
+
+    /**
+     * Register an OPTIONS route.
+     *
+     * @param string $uri
+     * @param string|string[] $action
+     * @return void
+     */
+    public function options(string $uri, array|string $action): void;
+
+    /**
+     * Register a HEAD route.
+     *
+     * @param string $uri
+     * @param string|string[] $action
+     * @return void
+     */
+    public function head(string $uri, array|string $action): void;
+
+    /**
+     * Dispatch the request.
+     *
+     * @param ServerRequestInterface $serverRequest
+     * @return ResponseInterface
+     */
+    public function handle(ServerRequestInterface $serverRequest): ResponseInterface;
+
+    /**
+     * Discover and register routes from given namespaces and paths.
+     *
+     * @param string $rootNamespace
+     * @param string $rootPath
+     * @param array<string, string> $namespacePaths Array of additional namespace => path pairs to scan
+     * @return void
+     */
+    public function routeDiscovery(
+        string $rootNamespace,
+        string $rootPath,
+        array $namespacePaths = []
+    ): void;
+}

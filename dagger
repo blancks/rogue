@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+// bin/console.php - CLI entry point
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Rogue\Mantle\Console\CommandDispatcher;
+
+$dispatcher = new CommandDispatcher();
+
+// Register your commands here
+$dispatcher->register('hello', new \Rogue\Mantle\Console\Commands\HelloCommand());
+
+// Parse command name and arguments
+$argv = $_SERVER['argv'] ?? [];
+$argc = $_SERVER['argc'] ?? 0;
+
+if ($argc < 2) {
+    echo "Usage: php dagger <command> [arguments]\n";
+    exit(1);
+}
+
+$command = $argv[1];
+$args = array_slice($argv, 2);
+
+$dispatcher->run($command, $args);

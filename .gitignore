@@ -1,0 +1,5 @@
+.vscode
+plugin
+storage/cache
+storage/logs
+vendor
