@@ -52,11 +52,14 @@ final class WebServiceProvider implements ServiceProviderInterface // TODO: crea
                 Container::getInstance(),
                 EventDispatcher::getInstance(),
                 new UnmaskedRouteDiscovery(),
-                new MiddlewareDispatcherFactory(MiddlewareDispatcher::class)
+                new MiddlewareDispatcherFactory(
+                    MiddlewareDispatcher::class,
+                    Container::getInstance()
+                )
             )
         );
 
-        Router::addMiddleware(new ExceptionHandlerMiddleware());
+        Router::addMiddleware(ExceptionHandlerMiddleware::class);
 
         // Container::bind(SomethingInterface::class, SomeConcreteClass::class);
 
