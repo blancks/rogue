@@ -39,6 +39,23 @@ class RouteTest extends TestCase
         $this->assertSame($middlewares, $route->getMiddleware());
     }
 
+    #[DataProvider('routeMethodProvider')]
+    public function testAttributeClassChild(HttpMethod $method): void
+    {
+        // Arrange
+        $middlewares = ['one', 'two', 'three'];
+        $className = '\\Rogue\\Mantle\\Routing\\Attributes\\'. ucwords($method->value);
+
+        // Act + Asserts
+        $this->assertTrue(class_exists($className), 'Attribute does not exist');
+
+        $route = new $className('/foo/{bar}', $middlewares);
+
+        $this->assertSame($method, $route->getMethod());
+        $this->assertSame('/foo/{bar}', $route->getPath());
+        $this->assertSame($middlewares, $route->getMiddleware());
+    }
+
     public static function routeMethodProvider(): \Generator
     {
         foreach (HttpMethod::cases() as $httpMethod) {
