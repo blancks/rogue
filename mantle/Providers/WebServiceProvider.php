@@ -18,12 +18,12 @@ use Rogue\Mantle\Events\EventDispatcher as EventsEventDispatcher;
 use Rogue\Mantle\Http\Middlewares\ExceptionHandlerMiddleware;
 use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcher;
 use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcherFactory;
-use Rogue\Mantle\Routing\Router as RoutingRouter;
 use Rogue\Mantle\Routing\UnmaskedRouteDiscovery;
 use Monolog\Logger as MonologLogger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Psr\Log\LoggerInterface;
+use Rogue\Mantle\Routing\Wrappers\FastRoute;
 
 /**
  * Class WebServiceProvider
@@ -48,7 +48,7 @@ final class WebServiceProvider implements ServiceProviderInterface // TODO: crea
         Request::setInstance(GuzzleServerRequest::fromGlobals());
         Response::setInstance(new GuzzleResponse());
         Router::setInstance(
-            new RoutingRouter(
+            new FastRoute(
                 Container::getInstance(),
                 EventDispatcher::getInstance(),
                 new UnmaskedRouteDiscovery(),
