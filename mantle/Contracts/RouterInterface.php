@@ -6,7 +6,7 @@ namespace Rogue\Mantle\Contracts;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
+use Rogue\Mantle\Http\HttpMethod;
 
 /**
  * Interface RouterInterface
@@ -93,6 +93,21 @@ interface RouterInterface
      * @return ResponseInterface
      */
     public function handle(ServerRequestInterface $serverRequest): ResponseInterface;
+
+    /**
+     * Add a route for a specific HTTP verb.
+     *
+     * @param HttpMethod $httpMethod
+     * @param string $uri
+     * @param string|string[] $action
+     * @param string[] $middleware
+     */
+    public function addRoute(
+        HttpMethod $httpMethod,
+        string $uri,
+        array|string $action,
+        array $middleware = []
+    ): void;
 
     /**
      * Discover and register routes from given namespaces and paths.

@@ -9,7 +9,6 @@ use FastRoute\Dispatcher;
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Rogue\Mantle\Contracts\ContainerInterface;
 use Rogue\Mantle\Contracts\EventDispatcherInterface;
 use Rogue\Mantle\Contracts\RouteDiscoveryInterface;
@@ -194,7 +193,7 @@ final class FastRoute implements RouterInterface
      * @param string|string[] $action
      * @param string[] $middleware
      */
-    private function addRoute(
+    public function addRoute(
         HttpMethod $httpMethod,
         string $uri,
         array|string $action,

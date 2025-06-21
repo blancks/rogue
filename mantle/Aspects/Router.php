@@ -6,9 +6,9 @@ namespace Rogue\Mantle\Aspects;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Rogue\Mantle\Contracts\RouterInterface;
 use Rogue\Mantle\Contracts\Traits\SingletonTrait;
+use Rogue\Mantle\Http\HttpMethod;
 
 /**
  * Router
@@ -121,6 +121,22 @@ final class Router
     public static function head(string $uri, array|string $action): void
     {
         static::getInstance()->head($uri, $action);
+    }
+
+    /**
+     * Proxy to RouterInterface::addRoute
+     * @param HttpMethod $httpMethod
+     * @param string $uri
+     * @param string|string[] $action
+     * @param string[] $middleware
+     */
+    public function addRoute(
+        HttpMethod $httpMethod,
+        string $uri,
+        array|string $action,
+        array $middleware = []
+    ): void {
+        static::getInstance()->addRoute($httpMethod, $uri, $action);
     }
 
     /**
