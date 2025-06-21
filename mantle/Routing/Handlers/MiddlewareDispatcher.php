@@ -8,13 +8,18 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Rogue\Mantle\Contracts\ContainerAwareInterface;
+use Rogue\Mantle\Contracts\MiddlewareDispatcherInterface;
+use Rogue\Mantle\Contracts\Traits\ContainerAwareTrait;
 use ValueError;
 
 /**
  * Dispatches a stack of middleware and delegates to the final handler.
  */
-class MiddlewareDispatcher implements RequestHandlerInterface
+class MiddlewareDispatcher implements MiddlewareDispatcherInterface, ContainerAwareInterface
 {
+    use ContainerAwareTrait;
+
     /** @var MiddlewareInterface[] $middlewareStack The stack of middleware to process. */
     private array $middlewareStack;
 
@@ -22,16 +27,20 @@ class MiddlewareDispatcher implements RequestHandlerInterface
     private RequestHandlerInterface $finalHandler;
 
     /**
-     * @param object[] $middlewareStack The stack of middleware to process.
-     * @param RequestHandlerInterface $finalHandler The final request handler.
-     * @throws ValueError If an invalid middleware is found.
+     * Provides the middleware stack to the dispatcher
+     * @param string[] $middleware List of middleware classnames extending the PSR-15 MiddlewareInterface
      */
-    public function __construct(array $middlewareStack, RequestHandlerInterface $finalHandler)
+    public function setMiddlewareStack(array $middleware): void
     {
-        $this->assertValidMiddlewares($middlewareStack);
+        $this->middlewareStack = $this->getMiddlewareInstances($middleware);
+    }
 
-        /** @var MiddlewareInterface[] $middlewareStack */
-        $this->middlewareStack = $middlewareStack;
+    /**
+     * Set the final request handler
+     * @param RequestHandlerInterface $finalHandler
+     */
+    public function setFinalHandler(RequestHandlerInterface $finalHandler): void
+    {
         $this->finalHandler = $finalHandler;
     }
 
@@ -54,17 +63,25 @@ class MiddlewareDispatcher implements RequestHandlerInterface
     /**
      * Validates that all items in the middleware stack implement MiddlewareInterface.
      *
-     * @param object[] $middlewareStack The stack of middleware to process.
-     * @throws ValueError If an invalid middleware is found.
+     * @param string[] $middlewareStack The stack of middleware to instantiate.
+     * @return MiddlewareInterface[]
+     * @throws ValueError If an invalid middleware is detected.
      */
-    private function assertValidMiddlewares(array $middlewareStack): void
+    private function getMiddlewareInstances(array $middlewareStack): array
     {
-        foreach ($middlewareStack as $middleware) {
+        $instances = [];
+
+        foreach ($middlewareStack as $middlewareClass) {
+            $middleware = $this->container->make($middlewareClass);
+
             if ($middleware instanceof MiddlewareInterface) {
+                $instances[] = $middleware;
                 continue;
             }
 
             throw new ValueError(sprintf('Invalid middleware: %s', get_class($middleware)));
         }
+
+        return $instances;
     }
 }
