@@ -107,10 +107,10 @@ You can also bind custom implementations or singletons to the container for more
     * [x] nikic/fast-route Implementation
     * [x] Check if 405 http status can be implemented
     * [ ] Check if 406 http status can be implemented
-* [ ] Router Middlewares
     * [x] Base Implementation (PSR-15)
     * [x] Global Middleware
-    * [ ] Route-Specific Middleware
+    * [x] Route-Specific Middleware
+* [ ] Router Middlewares
     * [x] Exception handling middleware
     * [ ] Authentication Middleware
     * [ ] Throttle Middleware
