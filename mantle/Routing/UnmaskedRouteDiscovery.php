@@ -110,10 +110,10 @@ final class UnmaskedRouteDiscovery implements RouteDiscoveryInterface
         $filePathWithoutExtension = substr($filePath, 0, -4);
 
         $ds = DIRECTORY_SEPARATOR;
-        $relativePath = ltrim(str_replace($ds, '/', $filePathWithoutExtension), '/');
+        $relativePath = str_replace($ds, '/', $filePathWithoutExtension);
         $baseDir = rtrim(str_replace($ds, '/', $baseDir), '/');
 
-        if (strpos($relativePath, $baseDir) === 0) {
+        if (str_contains($relativePath, $baseDir)) {
             $relativePath = substr($relativePath, strlen($baseDir));
         }
 
