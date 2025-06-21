@@ -70,10 +70,11 @@ final class FastRoute implements RouterInterface
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public function get(string $uri, array|string $action): void
+    public function get(string $uri, array|string $action, array $middleware = []): void
     {
-        $this->addRoute(HttpMethod::GET, $uri, $action);
+        $this->addRoute(HttpMethod::GET, $uri, $action, $middleware);
     }
 
     /**
@@ -81,10 +82,11 @@ final class FastRoute implements RouterInterface
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public function post(string $uri, array|string $action): void
+    public function post(string $uri, array|string $action, array $middleware = []): void
     {
-        $this->addRoute(HttpMethod::POST, $uri, $action);
+        $this->addRoute(HttpMethod::POST, $uri, $action, $middleware);
     }
 
     /**
@@ -92,10 +94,11 @@ final class FastRoute implements RouterInterface
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public function put(string $uri, array|string $action): void
+    public function put(string $uri, array|string $action, array $middleware = []): void
     {
-        $this->addRoute(HttpMethod::PUT, $uri, $action);
+        $this->addRoute(HttpMethod::PUT, $uri, $action, $middleware);
     }
 
     /**
@@ -103,10 +106,11 @@ final class FastRoute implements RouterInterface
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public function patch(string $uri, array|string $action): void
+    public function patch(string $uri, array|string $action, array $middleware = []): void
     {
-        $this->addRoute(HttpMethod::PATCH, $uri, $action);
+        $this->addRoute(HttpMethod::PATCH, $uri, $action, $middleware);
     }
 
     /**
@@ -114,10 +118,11 @@ final class FastRoute implements RouterInterface
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public function delete(string $uri, array|string $action): void
+    public function delete(string $uri, array|string $action, array $middleware = []): void
     {
-        $this->addRoute(HttpMethod::DELETE, $uri, $action);
+        $this->addRoute(HttpMethod::DELETE, $uri, $action, $middleware);
     }
 
     /**
@@ -125,10 +130,11 @@ final class FastRoute implements RouterInterface
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public function options(string $uri, array|string $action): void
+    public function options(string $uri, array|string $action, array $middleware = []): void
     {
-        $this->addRoute(HttpMethod::OPTIONS, $uri, $action);
+        $this->addRoute(HttpMethod::OPTIONS, $uri, $action, $middleware);
     }
 
     /**
@@ -136,10 +142,11 @@ final class FastRoute implements RouterInterface
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public function head(string $uri, array|string $action): void
+    public function head(string $uri, array|string $action, array $middleware = []): void
     {
-        $this->addRoute(HttpMethod::HEAD, $uri, $action);
+        $this->addRoute(HttpMethod::HEAD, $uri, $action, $middleware);
     }
 
     /**

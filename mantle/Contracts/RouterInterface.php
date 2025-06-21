@@ -28,63 +28,70 @@ interface RouterInterface
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      * @return void
      */
-    public function get(string $uri, array|string $action): void;
+    public function get(string $uri, array|string $action, array $middleware = []): void;
 
     /**
      * Register a POST route.
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      * @return void
      */
-    public function post(string $uri, array|string $action): void;
+    public function post(string $uri, array|string $action, array $middleware = []): void;
 
     /**
      * Register a PUT route.
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      * @return void
      */
-    public function put(string $uri, array|string $action): void;
+    public function put(string $uri, array|string $action, array $middleware = []): void;
 
     /**
      * Register a PATCH route.
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      * @return void
      */
-    public function patch(string $uri, array|string $action): void;
+    public function patch(string $uri, array|string $action, array $middleware = []): void;
 
     /**
      * Register a DELETE route.
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      * @return void
      */
-    public function delete(string $uri, array|string $action): void;
+    public function delete(string $uri, array|string $action, array $middleware = []): void;
 
     /**
      * Register an OPTIONS route.
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      * @return void
      */
-    public function options(string $uri, array|string $action): void;
+    public function options(string $uri, array|string $action, array $middleware = []): void;
 
     /**
      * Register a HEAD route.
      *
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      * @return void
      */
-    public function head(string $uri, array|string $action): void;
+    public function head(string $uri, array|string $action, array $middleware = []): void;
 
     /**
      * Dispatch the request.

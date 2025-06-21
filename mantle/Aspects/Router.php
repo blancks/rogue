@@ -57,70 +57,77 @@ final class Router
      * Proxy to RouterInterface::get
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public static function get(string $uri, array|string $action): void
+    public static function get(string $uri, array|string $action, array $middleware = []): void
     {
-        static::getInstance()->get($uri, $action);
+        static::getInstance()->get($uri, $action, $middleware);
     }
 
     /**
      * Proxy to RouterInterface::post
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public static function post(string $uri, array|string $action): void
+    public static function post(string $uri, array|string $action, array $middleware = []): void
     {
-        static::getInstance()->post($uri, $action);
+        static::getInstance()->post($uri, $action, $middleware);
     }
 
     /**
      * Proxy to RouterInterface::put
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public static function put(string $uri, array|string $action): void
+    public static function put(string $uri, array|string $action, array $middleware = []): void
     {
-        static::getInstance()->put($uri, $action);
+        static::getInstance()->put($uri, $action, $middleware);
     }
 
     /**
      * Proxy to RouterInterface::patch
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public static function patch(string $uri, array|string $action): void
+    public static function patch(string $uri, array|string $action, array $middleware = []): void
     {
-        static::getInstance()->patch($uri, $action);
+        static::getInstance()->patch($uri, $action, $middleware);
     }
 
     /**
      * Proxy to RouterInterface::delete
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public static function delete(string $uri, array|string $action): void
+    public static function delete(string $uri, array|string $action, array $middleware = []): void
     {
-        static::getInstance()->delete($uri, $action);
+        static::getInstance()->delete($uri, $action, $middleware);
     }
 
     /**
      * Proxy to RouterInterface::options
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public static function options(string $uri, array|string $action): void
+    public static function options(string $uri, array|string $action, array $middleware = []): void
     {
-        static::getInstance()->options($uri, $action);
+        static::getInstance()->options($uri, $action, $middleware);
     }
 
     /**
      * Proxy to RouterInterface::head
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    public static function head(string $uri, array|string $action): void
+    public static function head(string $uri, array|string $action, array $middleware = []): void
     {
-        static::getInstance()->head($uri, $action);
+        static::getInstance()->head($uri, $action, $middleware);
     }
 
     /**
@@ -136,7 +143,7 @@ final class Router
         array|string $action,
         array $middleware = []
     ): void {
-        static::getInstance()->addRoute($httpMethod, $uri, $action);
+        static::getInstance()->addRoute($httpMethod, $uri, $action, $middleware);
     }
 
     /**
