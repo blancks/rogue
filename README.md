@@ -104,7 +104,8 @@ You can also bind custom implementations or singletons to the container for more
     * [ ] get config data from files
     * [ ] set config data for specific instance
 * [ ] Router
-    * [ ] Check if 405 http status can be implemented
+    * [x] nikic/fast-route Implementation
+    * [x] Check if 405 http status can be implemented
     * [ ] Check if 406 http status can be implemented
 * [ ] Router Middlewares
     * [x] Base Implementation (PSR-15)
@@ -115,7 +116,7 @@ You can also bind custom implementations or singletons to the container for more
     * [ ] Throttle Middleware
 * [ ] Route Caching
     * [ ] Base Implementation
-* [ ] Debugger Aspect
+* [ ] Debugger Aspect (probably wont be needed: debugger will be disabled at all in production)
     * [x] Use a debugging tool (nette/tracy)
 * [x] Logger Aspect
     * [x] Use a PSR-3 logger (monolog)
@@ -124,6 +125,7 @@ You can also bind custom implementations or singletons to the container for more
     * [x] UnauthorizedException - 401
     * [x] ForbiddenException - 403
     * [x] NotFoundException - 404
+    * [x] MethodNotAllowedException - 405
     * [x] ConflictException - 409
     * [x] GoneException - 410
     * [x] LockedException - 423
@@ -145,7 +147,7 @@ You can also bind custom implementations or singletons to the container for more
     * [ ] JsonResource
 * [ ] Database/ORM (likely Eloquent)
     * [ ] Migrations
-* [ ] Hookable Plugins
+* [ ] Plugins
     * [ ] ServiceProvider
 * [ ] Custom Service Providers
     * [ ] Rogue\App\Providers
