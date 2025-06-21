@@ -22,11 +22,11 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         $this->appDir = dirname($this->testAppControllerFilename);
 
         if (!is_dir($this->maskDir)) {
-            mkdir($this->maskDir);
+            mkdir($this->maskDir, recursive: true);
         }
 
         if (!is_dir($this->appDir)) {
-            mkdir($this->appDir);
+            mkdir($this->appDir, recursive: true);
         }
 
         file_put_contents(
