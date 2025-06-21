@@ -16,7 +16,7 @@ interface MiddlewareDispatcherFactoryInterface
     /**
      * Create a new middleware dispatcher instance.
      *
-     * @param MiddlewareInterface[] $middlewareStack The stack of middleware to dispatch.
+     * @param string[] $middlewareStack The stack of middleware to dispatch.
      * @param Closure $dispatchClosure The dispatch closure that resolves the routed controller.
      * @return RequestHandlerInterface The composed middleware dispatcher.
      */

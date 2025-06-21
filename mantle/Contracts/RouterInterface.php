@@ -18,10 +18,10 @@ interface RouterInterface
     /**
      * Add a middleware to the global middleware stack.
      *
-     * @param MiddlewareInterface $middleware The middleware to add.
+     * @param string $middleware FQCN of the middleware. Must implement \Psr\Http\Server\MiddlewareInterface
      * @return void
      */
-    public function addMiddleware(MiddlewareInterface $middleware): void;
+    public function addMiddleware(string $middleware): void;
 
     /**
      * Register a GET route.

@@ -45,10 +45,10 @@ final class Router
     /**
      * Add a middleware to the global middleware stack.
      *
-     * @param MiddlewareInterface $middleware The middleware to add.
+     * @param string $middleware FQCN of the middleware. Must implement \Psr\Http\Server\MiddlewareInterface
      * @return void
      */
-    public static function addMiddleware(MiddlewareInterface $middleware): void
+    public static function addMiddleware(string $middleware): void
     {
         static::getInstance()->addMiddleware($middleware);
     }
