@@ -29,12 +29,13 @@ final class FastRoute implements RouterInterface
     /**
      * @var array<string, array<array{
      *  pattern: string,
-     *  action:string|string[]
+     *  action:string|string[],
+     *  middleware: string[]
      * }>> Stores routes grouped by HTTP verb.
      */
     private array $routes = [];
 
-    /** @var array<MiddlewareInterface> */
+    /** @var string[] List of middleware classnames */
     private array $middlewares = [];
 
     /** @var Dispatcher FastRoute dispatcher instance */
@@ -57,10 +58,10 @@ final class FastRoute implements RouterInterface
     /**
      * Add a global middleware to the middleware stack.
      *
-     * @param MiddlewareInterface $middleware The middleware to add.
+     * @param string $middleware FQCN of the middleware. Must implement \Psr\Http\Server\MiddlewareInterface
      * @return void
      */
-    public function addMiddleware(MiddlewareInterface $middleware): void
+    public function addMiddleware(string $middleware): void
     {
         $this->middlewares[] = $middleware;
     }
@@ -174,7 +175,11 @@ final class FastRoute implements RouterInterface
 
                 foreach ($this->routes as $method => $routes) {
                     foreach ($routes as $route) {
-                        $fastRouter->addRoute($method, $route['pattern'], $route['action']);
+                        $fastRouter->addRoute(
+                            httpMethod: $method,
+                            route: $route['pattern'],
+                            handler: [$route['action'], $route['middleware']]
+                        );
                     }
                 }
             }
@@ -187,14 +192,20 @@ final class FastRoute implements RouterInterface
      * @param HttpMethod $httpMethod
      * @param string $uri
      * @param string|string[] $action
+     * @param string[] $middleware
      */
-    private function addRoute(HttpMethod $httpMethod, string $uri, array|string $action): void
-    {
+    private function addRoute(
+        HttpMethod $httpMethod,
+        string $uri,
+        array|string $action,
+        array $middleware = []
+    ): void {
         $verb = $httpMethod->value;
 
         $this->routes[$verb][] = [
             'pattern' => $uri,
             'action' => $action,
+            'middleware' => $middleware,
         ];
 
         $this->eventDispatcher->dispatch('router.route.added', [$verb, $uri]);
@@ -213,7 +224,7 @@ final class FastRoute implements RouterInterface
         $routes = $this->routeDiscovery->discover($rootNamespace, $rootPath, $namespacePaths);
 
         foreach ($routes as $route) {
-            $this->addRoute($route['method'], $route['path'], $route['action']);
+            $this->addRoute($route['method'], $route['path'], $route['action'], $route['middleware']);
         }
     }
 
@@ -231,7 +242,7 @@ final class FastRoute implements RouterInterface
         $this->eventDispatcher->dispatch('router.dispatch.begin', [$method, $uri]);
 
         $routeInfo = $this->dispatcher->dispatch($method, $uri);
-        $dispatchClosure = $this->getResolveFunction($routeInfo);
+        $dispatchClosure = $this->dispatcherResultToResolveFunction($routeInfo);
 
         $response = $this->midlewareDispatcherFactory
             ->create($this->middlewares, $dispatchClosure)
@@ -248,12 +259,13 @@ final class FastRoute implements RouterInterface
 
     /**
      * Returns a function that invokes the routed controller or action.
+     * Side effect: if the matching route has middlewares they will be added to the stack.
      *
      * @param array<mixed> $routeInfo data returned by FastRoute dispatcher.
      * @return Closure The closure to handle the route.
      * @throws NotFoundException
      */
-    private function getResolveFunction(array $routeInfo): Closure
+    private function dispatcherResultToResolveFunction(array $routeInfo): Closure
     {
         if (!isset($routeInfo[0])) {
             return fn () => throw new LogicException('nikic/fast-route did not returned a dispatcher status');
@@ -271,9 +283,11 @@ final class FastRoute implements RouterInterface
                 return fn () => throw new MethodNotAllowedException($routeInfo[1]);
 
             case Dispatcher::FOUND:
-                /** @var array{0: int, 1: string|string[], 2: array<string,string>} $routeInfo */
-                $handler = $routeInfo[1];
+                /** @var array{0: int, 1: array{0: string|string[], 1: string[]}, 2: array<string,string>} $routeInfo */
+                [$handler, $middleware] = $routeInfo[1];
                 $params = $routeInfo[2];
+
+                $this->middlewares = array_merge($this->middlewares, $middleware);
 
                 if (is_string($handler)) {
                     $controller = $this->container->make($handler);
