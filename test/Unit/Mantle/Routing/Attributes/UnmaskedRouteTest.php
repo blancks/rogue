@@ -32,6 +32,13 @@ class UnmaskedRouteTest extends TestCase
         );
     }
 
+    public function testRouteAcceptsAndReturnsMiddlewares(): void
+    {
+        $middlewares = ['auth', 'throttle'];
+        $route = new UnmaskedRoute(HttpMethod::POST, '/foo', $middlewares);
+        $this->assertSame($middlewares, $route->getMiddleware());
+    }
+
     public static function routeMethodProvider(): \Generator
     {
         foreach (HttpMethod::cases() as $httpMethod) {
