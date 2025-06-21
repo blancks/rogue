@@ -19,10 +19,12 @@ readonly class Route implements RouteAttributeInterface
      *
      * @param HttpMethod $method The HTTP method.
      * @param string $path The route path.
+     * @param string[] $middleware List of ordered middleware classes.
      */
     public function __construct(
         private HttpMethod $method,
-        private string $path
+        private string $path,
+        private array $middleware = []
     ) {
     }
 
@@ -44,5 +46,15 @@ readonly class Route implements RouteAttributeInterface
     public function getPath(): string
     {
         return $this->path;
+    }
+
+    /**
+     * Get the list of ordered middleware classes for the route.
+     *
+     * @return string[]
+     */
+    public function getMiddleware(): array
+    {
+        return $this->middleware;
     }
 }

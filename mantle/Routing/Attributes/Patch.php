@@ -19,10 +19,12 @@ final readonly class Patch extends Route
      * Patch constructor.
      *
      * @param string $path The route path.
+     * @param string[] $middleware List of ordered middleware classes.
      */
     public function __construct(
-        private string $path
+        private string $path,
+        private array $middleware = []
     ) {
-        parent::__construct(HttpMethod::PATCH, $this->path);
+        parent::__construct(HttpMethod::PATCH, $this->path, $this->middleware);
     }
 }

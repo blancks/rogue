@@ -19,10 +19,12 @@ final readonly class UHead extends UnmaskedRoute
      * UHead constructor.
      *
      * @param string $path The route path.
+     * @param string[] $middleware List of ordered middleware classes.
      */
     public function __construct(
-        private string $path
+        private string $path,
+        private array $middleware = []
     ) {
-        parent::__construct(HttpMethod::HEAD, $this->path);
+        parent::__construct(HttpMethod::HEAD, $this->path, $this->middleware);
     }
 }
