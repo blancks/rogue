@@ -30,6 +30,7 @@
         "psr/http-server-middleware": "^1.0",
         "psr/log": "^3.0",
         "guzzlehttp/guzzle": "^7.9",
-        "monolog/monolog": "^3.9"
+        "monolog/monolog": "^3.9",
+        "nikic/fast-route": "^1.3"
     }
 }
