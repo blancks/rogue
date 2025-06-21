@@ -33,7 +33,8 @@ final class UnmaskedRouteDiscovery implements RouteDiscoveryInterface
      * @return Generator<array{
      *  method: HttpMethod,
      *  path: string,
-     *  action: string[]
+     *  action: string[],
+     *  middleware: string[],
      * }> Yields arrays containing route data.
      */
     public function discover(
@@ -134,7 +135,8 @@ final class UnmaskedRouteDiscovery implements RouteDiscoveryInterface
      * @return Generator<array{
      *  method: HttpMethod,
      *  path: string,
-     *  action: string[]
+     *  action: string[],
+     *  middleware: string[],
      * }>
      */
     private function discoverMethodUnmaskedRoutes(
@@ -160,7 +162,8 @@ final class UnmaskedRouteDiscovery implements RouteDiscoveryInterface
                         verb: $unmaskedRouteAttribute->getMethod(),
                         path: $unmaskedRouteAttribute->getPath(),
                         className: $unmaskedClassName,
-                        methodName: $method->getName()
+                        methodName: $method->getName(),
+                        middleware: $unmaskedRouteAttribute->getMiddleware()
                     );
 
                     continue 2;
@@ -171,7 +174,8 @@ final class UnmaskedRouteDiscovery implements RouteDiscoveryInterface
                 verb: $unmaskedRouteAttribute->getMethod(),
                 path: $unmaskedRouteAttribute->getPath(),
                 className: $className,
-                methodName: $method->getName()
+                methodName: $method->getName(),
+                middleware: $unmaskedRouteAttribute->getMiddleware()
             );
         }
     }
@@ -182,7 +186,8 @@ final class UnmaskedRouteDiscovery implements RouteDiscoveryInterface
      * @return Generator<array{
      *  method: HttpMethod,
      *  path: string,
-     *  action: string[]
+     *  action: string[],
+     *  middleware: string[],
      * }>
      */
     private function discoverMethodRoutes(ReflectionMethod $method, string $className): Generator
@@ -194,7 +199,8 @@ final class UnmaskedRouteDiscovery implements RouteDiscoveryInterface
                 verb: $routeAttribute->getMethod(),
                 path: $routeAttribute->getPath(),
                 className: $className,
-                methodName: $method->getName()
+                methodName: $method->getName(),
+                middleware: $routeAttribute->getMiddleware()
             );
         }
     }
@@ -204,22 +210,26 @@ final class UnmaskedRouteDiscovery implements RouteDiscoveryInterface
      * @param string $path
      * @param string $className
      * @param string $methodName
+     * @param string[] $middleware
      * @return array{
      *  method: HttpMethod,
      *  path: string,
-     *  action: string[]
+     *  action: string[],
+     *  middleware: string[],
      * }
      */
     private function routeDataFormat(
         HttpMethod $verb,
         string $path,
         string $className,
-        string $methodName
+        string $methodName,
+        array $middleware = []
     ): array {
         return [
             'method' => $verb,
             'path' => $path,
             'action' => [$className, $methodName],
+            'middleware' => $middleware,
         ];
     }
 }

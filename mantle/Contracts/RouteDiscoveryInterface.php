@@ -17,7 +17,8 @@ interface RouteDiscoveryInterface
      * @return \Generator<array{
      *  method: HttpMethod,
      *  path: string,
-     *  action: string[]
+     *  action: string[],
+     *  middleware: string[]
      * }> Yields arrays containing route data.
      */
     public function discover(
