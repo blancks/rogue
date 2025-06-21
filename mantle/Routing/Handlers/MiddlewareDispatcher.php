@@ -29,6 +29,7 @@ class MiddlewareDispatcher implements MiddlewareDispatcherInterface, ContainerAw
     /**
      * Provides the middleware stack to the dispatcher
      * @param string[] $middleware List of middleware classnames extending the PSR-15 MiddlewareInterface
+     * @throws ValueError If an invalid middleware is detected.
      */
     public function setMiddlewareStack(array $middleware): void
     {
