@@ -140,25 +140,15 @@ class FastRouteTest extends TestCase
         });
         $this->container->method('call')->willReturn($response);
 
-        // Configuring the mocked MiddlewareDispatcherFactory create method to return a dummy RequestHandler
-        $this->middlewareDispatcherFactory->method('create')->willReturn(
-            new class ($response) implements RequestHandlerInterface {
-                private $response;
-                public function __construct($response)
-                {
-                    $this->response = $response;
-                }
-                public function handle(ServerRequestInterface $request): ResponseInterface
-                {
-                    return $this->response;
-                }
-            }
-        );
+        // Mocking the request handler
+        $requestHandler = $this->createMock(RequestHandlerInterface::class);
+        $requestHandler->method('handle')->willReturn($response);
+        $this->middlewareDispatcherFactory->method('create')->willReturn($requestHandler);
 
         // Incoming Server Request Mock
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getMethod')->willReturn('GET');
-        $request->method('getUri')->willReturn($this->getDummyUriObject('/foo'));
+        $request->method('getUri')->willReturn($this->getMockedUri('/foo'));
 
         // Act
         $result = $this->fastRoute->handle($request);
@@ -174,18 +164,11 @@ class FastRouteTest extends TestCase
         // Capture the closure passed to the middleware dispatcher factory
         $this->middlewareDispatcherFactory->method('create')->willReturnCallback(
             function ($middlewares, $closure) {
-                return new class ($closure) implements RequestHandlerInterface {
-                    private $closure;
-                    public function __construct($closure)
-                    {
-                        $this->closure = $closure;
-                    }
-                    public function handle(ServerRequestInterface $request): ResponseInterface
-                    {
-                        // This SHOULD throw the NotFoundException
-                        return ($this->closure)();
-                    }
-                };
+                $requestHandler = $this->createMock(RequestHandlerInterface::class);
+                $requestHandler->method('handle')->willReturnCallback(
+                    function () use ($closure) { return $closure(); }
+                );
+                return $requestHandler;
             }
         );
 
@@ -204,7 +187,7 @@ class FastRouteTest extends TestCase
         // Create mocked incoming server request
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getMethod')->willReturn('GET');
-        $request->method('getUri')->willReturn($this->getDummyUriObject('/notfound'));
+        $request->method('getUri')->willReturn($this->getMockedUri('/notfound'));
 
         // Act + Assert
         $this->expectException(\Rogue\Mantle\Http\Exceptions\NotFoundException::class);
@@ -218,25 +201,18 @@ class FastRouteTest extends TestCase
         // Capture the closure passed to the middleware dispatcher factory
         $this->middlewareDispatcherFactory->method('create')->willReturnCallback(
             function ($middlewares, $closure) {
-                return new class ($closure) implements RequestHandlerInterface {
-                    private $closure;
-                    public function __construct($closure)
-                    {
-                        $this->closure = $closure;
-                    }
-                    public function handle(ServerRequestInterface $request): ResponseInterface
-                    {
-                        // This SHOULD throw the NotFoundException
-                        return ($this->closure)();
-                    }
-                };
+                $requestHandler = $this->createMock(RequestHandlerInterface::class);
+                $requestHandler->method('handle')->willReturnCallback(
+                    function () use ($closure) { return $closure(); }
+                );
+                return $requestHandler;
             }
         );
 
         // Create mocked incoming server request
         $request = $this->createMock(ServerRequestInterface::class);
         $request->method('getMethod')->willReturn('POST');
-        $request->method('getUri')->willReturn($this->getDummyUriObject('/foo'));
+        $request->method('getUri')->willReturn($this->getMockedUri('/foo'));
 
         // Create a mocked dispatcher
         $dispatcher = $this->createMock(Dispatcher::class);
@@ -292,76 +268,11 @@ class FastRouteTest extends TestCase
         }
     }
 
-    private function getDummyUriObject(string $path): UriInterface
+    private function getMockedUri(string $path): UriInterface
     {
-        return new class ($path) implements UriInterface {
-            public function __construct(private string $path)
-            {
-            }
-            public function __toString(): string
-            {
-                return $this->path;
-            }
-            public function getPath(): string
-            {
-                return $this->path;
-            }
-            public function getScheme(): string
-            {
-                return '';
-            }
-            public function getAuthority(): string
-            {
-                return '';
-            }
-            public function getUserInfo(): string
-            {
-                return '';
-            }
-            public function getHost(): string
-            {
-                return '';
-            }
-            public function getPort(): int|null
-            {
-                return null;
-            }
-            public function getQuery(): string
-            {
-                return '';
-            }
-            public function getFragment(): string
-            {
-                return '';
-            }
-            public function withScheme($scheme): UriInterface
-            {
-                return $this;
-            }
-            public function withUserInfo($user, $password = null): UriInterface
-            {
-                return $this;
-            }
-            public function withHost($host): UriInterface
-            {
-                return $this;
-            }
-            public function withPort($port): UriInterface
-            {
-                return $this;
-            }
-            public function withPath($path): UriInterface
-            {
-                return $this;
-            }
-            public function withQuery($query): UriInterface
-            {
-                return $this;
-            }
-            public function withFragment($fragment): UriInterface
-            {
-                return $this;
-            }
-        };
+        $uriMock = $this->createMock(UriInterface::class);
+        $uriMock->method('getPath')->willReturn($path);
+        $uriMock->method('__toString')->willReturn($path);
+        return $uriMock;
     }
 }
