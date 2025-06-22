@@ -44,7 +44,7 @@ class RouteTest extends TestCase
     {
         // Arrange
         $middlewares = ['one', 'two', 'three'];
-        $className = '\\Rogue\\Mantle\\Routing\\Attributes\\'. ucwords($method->value);
+        $className = '\\Rogue\\Mantle\\Routing\\Attributes\\'. ucwords(strtolower($method->value));
 
         // Act + Asserts
         $this->assertTrue(class_exists($className), 'Attribute does not exist');
