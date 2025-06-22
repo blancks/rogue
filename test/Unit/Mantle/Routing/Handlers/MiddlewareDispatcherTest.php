@@ -59,7 +59,7 @@ class MiddlewareDispatcherTest extends TestCase
             ->with($request, $this->isInstanceOf(MiddlewareDispatcher::class))
             ->willReturn($response);
 
-        $container = $this->getMockContainerInstance($middlewareClass, $middleware);
+        $container = $this->getMockContainerInstance($middleware);
 
         // Act
         $dispatcher = new MiddlewareDispatcher();
@@ -78,7 +78,7 @@ class MiddlewareDispatcherTest extends TestCase
         $finalHandler = $this->createMock(RequestHandlerInterface::class);
         $invalidClass = 'InvalidMiddleware';
         $invalidMiddleware = new class () {};
-        $container = $this->getMockContainerInstance($invalidClass, $invalidMiddleware);
+        $container = $this->getMockContainerInstance($invalidMiddleware);
 
         $dispatcher = new MiddlewareDispatcher();
         $dispatcher->setContainer($container);
@@ -89,32 +89,10 @@ class MiddlewareDispatcherTest extends TestCase
         $dispatcher->setMiddlewareStack([$invalidClass]);
     }
 
-    private function getMockContainerInstance(
-        string $middlewareClass,
-        object $middleware
-    ): ContainerInterface {
-        return new class ($middlewareClass, $middleware) implements ContainerInterface {
-            private $class;
-            private $instance;
-            public function __construct($class, $instance)
-            {
-                $this->class = $class;
-                $this->instance = $instance;
-            }
-            public function make(string|object $abstract): object
-            {
-                if ($abstract === $this->class) {
-                    return $this->instance;
-                }
-                throw new \RuntimeException('Unknown class');
-            }
-            public function bind(string $abstract, string $concrete): void
-            {
-            }
-            public function call(array|\Closure $callable, array $parameters = []): mixed
-            {
-                return null;
-            }
-        };
+    private function getMockContainerInstance(object $middleware): ContainerInterface
+    {
+        $container = $this->createMock(ContainerInterface::class);
+        $container->method('make')->willReturn($middleware);
+        return $container;
     }
 }
