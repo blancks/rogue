@@ -80,7 +80,7 @@ class MiddlewareDispatcher implements MiddlewareDispatcherInterface, ContainerAw
                 continue;
             }
 
-            throw new ValueError(sprintf('Invalid middleware: %s', get_class($middleware)));
+            throw new ValueError(sprintf('Invalid middleware: %s', $middlewareClass));
         }
 
         return $instances;

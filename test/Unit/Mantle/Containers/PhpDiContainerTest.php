@@ -5,14 +5,67 @@ declare(strict_types=1);
 namespace Rogue\Test\Unit\Mantle\Containers;
 
 use PHPUnit\Framework\TestCase;
-use Rogue\Mantle\Containers\DependencyInjectionContainer;
+use Psr\Container\NotFoundExceptionInterface;
+use Rogue\Mantle\Containers\PhpDiContainer;
 
-class DependencyInjectionContainerTest extends TestCase
+class PhpDiContainerTest extends TestCase
 {
+    public function testGetReturnsStoredEntry(): void
+    {
+        // Arrange
+        $foo = new Foo();
+        $container = new PhpDiContainer();
+        $container->bind(FooInterface::class, Foo::class);
+
+        // Act
+        $result = $container->get(FooInterface::class);
+
+        // Assert
+        $this->assertInstanceOf(Foo::class, $result);
+        $this->assertInstanceOf(FooInterface::class, $result);
+    }
+
+    public function testGetThrowsExceptionForNonExistentEntry(): void
+    {
+        // Arrange
+        $container = new PhpDiContainer();
+
+        // Assert
+        $this->expectException(NotFoundExceptionInterface::class);
+
+        // Act
+        $container->get('NonExistentEntry');
+    }
+
+    public function testHasReturnsTrueForExistingEntry(): void
+    {
+        // Arrange
+        $container = new PhpDiContainer();
+        $container->bind(FooInterface::class, Foo::class);
+
+        // Act
+        $result = $container->has(FooInterface::class);
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    public function testHasReturnsFalseForNonExistentEntry(): void
+    {
+        // Arrange
+        $container = new PhpDiContainer();
+
+        // Act
+        $result = $container->has('NonExistentEntry');
+
+        // Assert
+        $this->assertFalse($result);
+    }
+
     public function testBindAndMakeResolvesConcreteClass(): void
     {
         // Arrange
-        $container = new DependencyInjectionContainer();
+        $container = new PhpDiContainer();
 
         // Act
         $container->bind(FooInterface::class, Foo::class);
@@ -26,7 +79,7 @@ class DependencyInjectionContainerTest extends TestCase
     public function testMakeResolvesDependenciesRecursively(): void
     {
         // Arrange
-        $container = new DependencyInjectionContainer();
+        $container = new PhpDiContainer();
 
         // Act
         $container->bind(FooInterface::class, Foo::class);
@@ -40,17 +93,16 @@ class DependencyInjectionContainerTest extends TestCase
 
     public function testMakeThrowsExceptionForNonExistentClass(): void
     {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Class NonExistentClass does not exist.');
+        $this->expectException(NotFoundExceptionInterface::class);
 
-        $container = new DependencyInjectionContainer();
+        $container = new PhpDiContainer();
         $container->make('NonExistentClass');
     }
 
     public function testCallInjectsDependencies(): void
     {
         // Arrange
-        $container = new DependencyInjectionContainer();
+        $container = new PhpDiContainer();
         $container->bind(FooInterface::class, Foo::class);
 
         // Act
@@ -65,7 +117,7 @@ class DependencyInjectionContainerTest extends TestCase
     public function testCallWithParametersOverridesDependency(): void
     {
         // Arrange
-        $container = new DependencyInjectionContainer();
+        $container = new PhpDiContainer();
         $foo = new Foo();
 
         // Act

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Rogue\Mantle\Contracts;
 
+use Psr\Container\ContainerInterface as PsrContainerInterface;
+
 /**
  * Interface ContainerInterface
  *
  * Defines the contract for a dependency injection container.
  */
-interface ContainerInterface
+interface ContainerInterface extends PsrContainerInterface
 {
     /**
      * Bind an abstract type to a concrete implementation or factory.
@@ -23,10 +25,10 @@ interface ContainerInterface
     /**
      * Resolve an instance of the given abstract type.
      *
-     * @param string|object $abstract
-     * @return object
+     * @param string $abstract
+     * @return mixed
      */
-    public function make(string|object $abstract): object;
+    public function make(string $abstract): mixed;
 
     /**
      * Call the given callable, automatically injecting dependencies.

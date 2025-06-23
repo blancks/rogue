@@ -23,6 +23,7 @@ use Monolog\Logger as MonologLogger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Psr\Log\LoggerInterface;
+use Rogue\Mantle\Containers\PhpDiContainer;
 use Rogue\Mantle\Routing\Wrappers\FastRoute;
 
 /**
@@ -43,7 +44,7 @@ final class WebServiceProvider implements ServiceProviderInterface // TODO: crea
     {
         $this->tracySetUp();
         Logger::setInstance($this->getMonologInstance());
-        Container::setInstance(new DependencyInjectionContainer());
+        Container::setInstance(new PhpDiContainer());
         EventDispatcher::setInstance(new EventsEventDispatcher());
         Request::setInstance(GuzzleServerRequest::fromGlobals());
         Response::setInstance(new GuzzleResponse());
@@ -91,6 +92,7 @@ final class WebServiceProvider implements ServiceProviderInterface // TODO: crea
 
     private function tracySetUp(): void
     {
+        // TODO: this will be moved to some class to abstract this setup
         if (!class_exists('\Tracy\Debugger')) {
             return;
         }

@@ -64,9 +64,33 @@ final class Container
     }
 
     /**
+     * Retrieves an entry from the container by its identifier.
+     *
+     * @param string $id The identifier of the entry to retrieve.
+     * @return mixed The entry.
+     * @throws \Psr\Container\NotFoundExceptionInterface If the entry is not found.
+     * @throws \Psr\Container\ContainerExceptionInterface If an error occurs during retrieval.
+     */
+    public static function get(string $id): mixed
+    {
+        return static::getInstance()->get($id);
+    }
+
+    /**
+     * Checks if the container can provide an entry for the given identifier.
+     *
+     * @param string $id The identifier to check.
+     * @return bool True if the container can provide an entry, false otherwise.
+     */
+    public static function has(string $id): bool
+    {
+        return static::getInstance()->has($id);
+    }
+
+    /**
      * Resolve an instance of the given abstract type.
      */
-    public static function make(string|object $abstract): object
+    public static function make(string $abstract): mixed
     {
         return static::getInstance()->make($abstract);
     }

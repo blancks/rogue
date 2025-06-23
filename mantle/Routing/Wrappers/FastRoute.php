@@ -311,6 +311,11 @@ final class FastRoute implements RouterInterface
 
                 return function () use ($className, $classMethod, $params) {
                     $controller = $this->container->make($className);
+
+                    if (!is_object($controller)) {
+                        throw new LogicException(sprintf('Invalid controller class: %s', $className));
+                    }
+
                     return $this->container->call([$controller, $classMethod], $params);
                 };
 
