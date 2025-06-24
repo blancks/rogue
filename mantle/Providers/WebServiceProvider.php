@@ -22,7 +22,9 @@ use Monolog\Logger as MonologLogger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Psr\Log\LoggerInterface;
+use Rogue\Mantle\Aspects\Debugger;
 use Rogue\Mantle\Containers\PhpDiContainer;
+use Rogue\Mantle\Debuggers\TracyDebugger;
 use Rogue\Mantle\Routing\Wrappers\FastRoute;
 
 /**
@@ -41,7 +43,9 @@ final class WebServiceProvider implements ServiceProviderInterface // TODO: crea
      */
     public function register(): void
     {
-        $this->tracySetUp();
+        Debugger::setInstance(new TracyDebugger());
+        Debugger::init();
+
         Logger::setInstance($this->getMonologInstance());
         Container::setInstance(new PhpDiContainer());
         EventDispatcher::setInstance(new EventsEventDispatcher());
@@ -87,17 +91,6 @@ final class WebServiceProvider implements ServiceProviderInterface // TODO: crea
         Response::send($response);
 
         EventDispatcher::dispatch('rogue.booted');
-    }
-
-    private function tracySetUp(): void
-    {
-        // TODO: this will be moved to some class to abstract this setup
-        if (!class_exists('\Tracy\Debugger')) {
-            return;
-        }
-
-        \Tracy\Debugger::enable();
-        \Tracy\Debugger::$showBar = false;
     }
 
     private function getMonologInstance(): LoggerInterface
