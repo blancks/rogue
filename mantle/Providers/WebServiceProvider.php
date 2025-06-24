@@ -13,7 +13,6 @@ use Rogue\Mantle\Aspects\Logger;
 use Rogue\Mantle\Aspects\Request;
 use Rogue\Mantle\Aspects\Response;
 use Rogue\Mantle\Aspects\Router;
-use Rogue\Mantle\Containers\DependencyInjectionContainer;
 use Rogue\Mantle\Events\EventDispatcher as EventsEventDispatcher;
 use Rogue\Mantle\Http\Middlewares\ExceptionHandlerMiddleware;
 use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcher;
