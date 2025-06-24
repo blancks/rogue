@@ -8,32 +8,31 @@ use PHPUnit\Framework\TestCase;
 
 class UnmaskedRouteDiscoveryTest extends TestCase
 {
-    private string $maskDir;
-    private string $appDir;
-    private string $testMaskControllerFilename;
-    private string $testAppControllerFilename;
+    private static string $testMaskControllerFilename;
+    private static string $testAppControllerFilename;
+    private static string $maskDir;
+    private static string $appDir;
 
-    protected function setUp(): void
+    public static function setUpBeforeClass(): void
     {
-        $this->testMaskControllerFilename = tmpPath('TestMaskNamespace/TestController.php');
-        $this->testAppControllerFilename = tmpPath('TestAppNamespace/TestController.php');
+        static::$testMaskControllerFilename = tmpPath('TestMaskNamespace2/TestController.php');
+        static::$testAppControllerFilename = tmpPath('TestAppNamespace2/TestController.php');
+        static::$maskDir = dirname(static::$testMaskControllerFilename);
+        static::$appDir = dirname(static::$testAppControllerFilename);
 
-        $this->maskDir = dirname($this->testMaskControllerFilename);
-        $this->appDir = dirname($this->testAppControllerFilename);
-
-        if (!is_dir($this->maskDir)) {
-            mkdir($this->maskDir, recursive: true);
+        if (!is_dir(static::$maskDir)) {
+            mkdir(static::$maskDir, recursive: true);
         }
 
-        if (!is_dir($this->appDir)) {
-            mkdir($this->appDir, recursive: true);
+        if (!is_dir(static::$appDir)) {
+            mkdir(static::$appDir, recursive: true);
         }
 
         file_put_contents(
-            $this->testMaskControllerFilename,
+            static::$testMaskControllerFilename,
             <<<PHP
             <?php
-                namespace TestMaskNamespace;
+                namespace TestMaskNamespace2;
                 use Rogue\Mantle\Routing\Attributes\Route;
                 use Rogue\Mantle\Routing\Attributes\UnmaskedRoute;
                 use Rogue\Mantle\Http\HttpMethod;
@@ -51,10 +50,10 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         );
 
         file_put_contents(
-            $this->testAppControllerFilename,
+            static::$testAppControllerFilename,
             <<<PHP
             <?php
-                namespace TestAppNamespace;
+                namespace TestAppNamespace2;
 
                 class TestController {
                     public function unmasked() {}
@@ -63,12 +62,12 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         );
     }
 
-    protected function tearDown(): void
+    public static function tearDownAfterClass(): void
     {
-        @unlink($this->testMaskControllerFilename);
-        @unlink($this->testAppControllerFilename);
-        @rmdir($this->maskDir);
-        @rmdir($this->appDir);
+        @unlink(static::$testMaskControllerFilename);
+        @unlink(static::$testAppControllerFilename);
+        @rmdir(static::$maskDir);
+        @rmdir(static::$appDir);
     }
 
     public function testDiscoversRouteAttribute(): void
@@ -79,7 +78,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         // Act
         $foundRoute1Action = false;
         $foundRoute2Action = false;
-        $routes = $discovery->discover('TestMaskNamespace', $this->maskDir);
+        $routes = $discovery->discover('TestMaskNamespace2', static::$maskDir);
 
         foreach ($routes as $route) {
             if (
@@ -100,8 +99,8 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         // Assert
         $this->assertNotFalse($foundRoute1Action, 'Route attribute for "/test" not discovered');
         $this->assertNotFalse($foundRoute2Action, 'Route attribute for "/test/foo" not discovered');
-        $this->assertSame(['TestMaskNamespace\\TestController', 'index'], $foundRoute1Action);
-        $this->assertSame(['TestMaskNamespace\\TestController', 'foobar'], $foundRoute2Action);
+        $this->assertSame(['TestMaskNamespace2\\TestController', 'index'], $foundRoute1Action);
+        $this->assertSame(['TestMaskNamespace2\\TestController', 'foobar'], $foundRoute2Action);
     }
 
     public function testDiscoversUnmaskedRouteAttribute(): void
@@ -111,7 +110,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
 
         // Act
         $foundRouteAction = false;
-        $routes = $discovery->discover('TestMaskNamespace', $this->maskDir);
+        $routes = $discovery->discover('TestMaskNamespace2', static::$maskDir);
 
         foreach ($routes as $route) {
             if (
@@ -125,7 +124,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
 
         // Assert
         $this->assertNotFalse($foundRouteAction, 'UnmaskedRoute attribute for "/unmasked" not discovered');
-        $this->assertSame(['TestMaskNamespace\\TestController', 'unmasked'], $foundRouteAction);
+        $this->assertSame(['TestMaskNamespace2\\TestController', 'unmasked'], $foundRouteAction);
     }
 
     public function testDiscoversMultipleRouteAttributeOnSameClassMethod(): void
@@ -136,7 +135,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         // Act
         $foundRoute1Action = false;
         $foundRoute2Action = false;
-        $routes = $discovery->discover('TestMaskNamespace', $this->maskDir);
+        $routes = $discovery->discover('TestMaskNamespace2', static::$maskDir);
 
         foreach ($routes as $route) {
             if (
@@ -157,8 +156,8 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         // Assert
         $this->assertNotFalse($foundRoute1Action, 'Route attribute for "/test/foo" not discovered');
         $this->assertNotFalse($foundRoute2Action, 'Route attribute for "/test/bar" not discovered');
-        $this->assertSame(['TestMaskNamespace\\TestController', 'foobar'], $foundRoute1Action);
-        $this->assertSame(['TestMaskNamespace\\TestController', 'foobar'], $foundRoute2Action);
+        $this->assertSame(['TestMaskNamespace2\\TestController', 'foobar'], $foundRoute1Action);
+        $this->assertSame(['TestMaskNamespace2\\TestController', 'foobar'], $foundRoute2Action);
     }
 
     public function testUnmaskedRouteIsResolvedToAppNamespace(): void
@@ -169,9 +168,9 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         // Act
         $foundRouteAction = false;
         $routes = $discovery->discover(
-            'TestMaskNamespace',
-            $this->maskDir,
-            ['TestAppNamespace' => $this->appDir]
+            'TestMaskNamespace2',
+            static::$maskDir,
+            ['TestAppNamespace2' => static::$appDir]
         );
 
         foreach ($routes as $route) {
@@ -186,6 +185,6 @@ class UnmaskedRouteDiscoveryTest extends TestCase
 
         // Assert
         $this->assertNotFalse($foundRouteAction, 'UnmaskedRoute attribute for "/unmasked" not discovered');
-        $this->assertSame(['TestAppNamespace\\TestController', 'unmasked'], $foundRouteAction);
+        $this->assertSame(['TestAppNamespace2\\TestController', 'unmasked'], $foundRouteAction);
     }
 }
