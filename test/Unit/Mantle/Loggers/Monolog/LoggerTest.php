@@ -281,10 +281,10 @@ class LoggerTest extends TestCase
         $this->logger->register('test-channel');
 
         // Create a LoggerProcessorInterface that is NOT a ProcessorInterface
-        $invalidProcessor = new class implements \Mantle\Contracts\LoggerProcessorInterface {
+        $invalidProcessor = new class () implements \Mantle\Contracts\LoggerProcessorInterface {
             public function getProcessor(): object|callable
             {
-                return function(array $record): array {
+                return function (array $record): array {
                     return $record;
                 };
             }
