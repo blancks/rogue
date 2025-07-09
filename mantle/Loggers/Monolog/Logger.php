@@ -7,6 +7,7 @@ namespace Mantle\Loggers\Monolog;
 use LogicException;
 use Monolog\Handler\FilterHandler as MonologFilterHandler;
 use Monolog\Handler\HandlerInterface as MonologHandlerInterface;
+use Monolog\Processor\ProcessorInterface as MonologProcessorInterface;
 use Monolog\Logger as MonologLogger;
 use Monolog\Level as MonologLevel;
 use Monolog\LogRecord;
@@ -162,7 +163,7 @@ class Logger implements LoggerInterface
             : $processor->getProcessor();
 
         $this->loggers[$channel]->pushProcessor(
-            !is_callable($discreteProcessor)
+            $discreteProcessor instanceof MonologProcessorInterface
                 ? $discreteProcessor
                 : fn (LogRecord $record): LogRecord =>
                     $record->with($discreteProcessor($record->toArray()))
