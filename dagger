@@ -4,12 +4,12 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Rogue\Mantle\Console\CommandDispatcher;
+use Mantle\Console\CommandDispatcher;
 
 $dispatcher = new CommandDispatcher();
 
 // Register your commands here
-$dispatcher->register('hello', new \Rogue\Mantle\Console\Commands\HelloCommand());
+$dispatcher->register('hello', new \Mantle\Console\Commands\HelloCommand());
 
 // Parse command name and arguments
 $argv = $_SERVER['argv'] ?? [];

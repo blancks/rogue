@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Containers;
+namespace Mantle\Containers;
 
 use DI\Container;
 use DI\ContainerBuilder;
-use Rogue\Mantle\Contracts\ContainerInterface;
+use Mantle\Contracts\ContainerInterface;
 
 use function DI\get;
 

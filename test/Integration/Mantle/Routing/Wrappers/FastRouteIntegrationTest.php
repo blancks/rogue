@@ -11,19 +11,19 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rogue\Mantle\Aspects\Container;
-use Rogue\Mantle\Aspects\EventDispatcher;
-use Rogue\Mantle\Aspects\Response;
-use Rogue\Mantle\Containers\PhpDiContainer;
-use Rogue\Mantle\Contracts\RouterInterface;
-use Rogue\Mantle\Events\EventDispatcher as EventsEventDispatcher;
-use Rogue\Mantle\Http\HttpMethod;
-use Rogue\Mantle\Http\HttpStatus;
-use Rogue\Mantle\Http\Middlewares\ExceptionHandlerMiddleware;
-use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcher;
-use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcherFactory;
-use Rogue\Mantle\Routing\UnmaskedRouteDiscovery;
-use Rogue\Mantle\Routing\Wrappers\FastRoute;
+use Mantle\Aspects\Container;
+use Mantle\Aspects\EventDispatcher;
+use Mantle\Aspects\Response;
+use Mantle\Containers\PhpDiContainer;
+use Mantle\Contracts\RouterInterface;
+use Mantle\Events\EventDispatcher as EventsEventDispatcher;
+use Mantle\Http\HttpMethod;
+use Mantle\Http\HttpStatus;
+use Mantle\Http\Middlewares\ExceptionHandlerMiddleware;
+use Mantle\Routing\Handlers\MiddlewareDispatcher;
+use Mantle\Routing\Handlers\MiddlewareDispatcherFactory;
+use Mantle\Routing\UnmaskedRouteDiscovery;
+use Mantle\Routing\Wrappers\FastRoute;
 
 class FastRouteIntegrationTest extends TestCase
 {
@@ -56,9 +56,9 @@ class FastRouteIntegrationTest extends TestCase
             <<<PHP
             <?php
                 namespace TestMaskNamespace;
-                use Rogue\Mantle\Routing\Attributes\Route;
-                use Rogue\Mantle\Routing\Attributes\UnmaskedRoute;
-                use Rogue\Mantle\Http\HttpMethod;
+                use Mantle\Routing\Attributes\Route;
+                use Mantle\Routing\Attributes\UnmaskedRoute;
+                use Mantle\Http\HttpMethod;
                 use TestAppNamespace\XSomethingHeader;
 
                 class TestController {
@@ -92,8 +92,8 @@ class FastRouteIntegrationTest extends TestCase
             <<<PHP
             <?php
                 namespace TestAppNamespace;
-                use Rogue\Mantle\Routing\Attributes\{Get, Post, Delete, Put, Patch, Options, Head};
-                use Rogue\Mantle\Http\HttpMethod;
+                use Mantle\Routing\Attributes\{Get, Post, Delete, Put, Patch, Options, Head};
+                use Mantle\Http\HttpMethod;
 
                 class TestController {
                     public function route() {

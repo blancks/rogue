@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Aspects;
+namespace Mantle\Aspects;
 
-use Rogue\Mantle\Contracts\DebuggerInterface;
-use Rogue\Mantle\Contracts\Traits\SingletonTrait;
+use Mantle\Contracts\DebuggerInterface;
+use Mantle\Contracts\Traits\SingletonTrait;
 
 /**
  * The Debugger class provides a static facade for accessing the debugger implementation.

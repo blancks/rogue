@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Routing\Handlers;
+namespace Mantle\Routing\Handlers;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Rogue\Mantle\Contracts\ContainerAwareInterface;
-use Rogue\Mantle\Contracts\MiddlewareDispatcherInterface;
-use Rogue\Mantle\Contracts\Traits\ContainerAwareTrait;
+use Mantle\Contracts\ContainerAwareInterface;
+use Mantle\Contracts\MiddlewareDispatcherInterface;
+use Mantle\Contracts\Traits\ContainerAwareTrait;
 use ValueError;
 
 /**

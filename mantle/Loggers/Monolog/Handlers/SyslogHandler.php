@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Loggers\Monolog\Handlers;
+namespace Mantle\Loggers\Monolog\Handlers;
 
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\HandlerInterface as MonologHandlerInterface;

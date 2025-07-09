@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Unit\Mantle\Contracts\Traits;
+namespace Test\Unit\Mantle\Contracts\Traits;
 
 use Error;
 use Exception;
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Rogue\Mantle\Contracts\Traits\SingletonTrait;
+use Mantle\Contracts\Traits\SingletonTrait;
 
 class SingletonTraitTest extends TestCase
 {

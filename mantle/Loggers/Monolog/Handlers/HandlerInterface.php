@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Loggers\Monolog\Handlers;
+namespace Mantle\Loggers\Monolog\Handlers;
 
 use Monolog\Handler\HandlerInterface as MonologHandlerInterface;
-use Rogue\Mantle\Contracts\LoggerHandlerInterface;
+use Mantle\Contracts\LoggerHandlerInterface;
 
 /**
  * Interface for Monolog handlers within the framework.

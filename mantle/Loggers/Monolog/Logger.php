@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Loggers\Monolog;
+namespace Mantle\Loggers\Monolog;
 
 use LogicException;
 use Monolog\Handler\FilterHandler as MonologFilterHandler;
@@ -11,12 +11,12 @@ use Monolog\Logger as MonologLogger;
 use Monolog\Level as MonologLevel;
 use Monolog\LogRecord;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
-use Rogue\Mantle\Contracts\LoggerHandlerInterface;
-use Rogue\Mantle\Contracts\LoggerInterface;
-use Rogue\Mantle\Contracts\LoggerProcessorInterface;
-use Rogue\Mantle\Loggers\Monolog\Handlers\HandlerInterface;
-use Rogue\Mantle\Loggers\Monolog\Handlers\StreamHandler;
-use Rogue\Mantle\Loggers\Monolog\Processors\ProcessorInterface;
+use Mantle\Contracts\LoggerHandlerInterface;
+use Mantle\Contracts\LoggerInterface;
+use Mantle\Contracts\LoggerProcessorInterface;
+use Mantle\Loggers\Monolog\Handlers\HandlerInterface;
+use Mantle\Loggers\Monolog\Handlers\StreamHandler;
+use Mantle\Loggers\Monolog\Processors\ProcessorInterface;
 use Throwable;
 use ValueError;
 

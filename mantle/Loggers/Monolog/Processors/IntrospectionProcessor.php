@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Loggers\Monolog\Processors;
+namespace Mantle\Loggers\Monolog\Processors;
 
 use Monolog\Processor\IntrospectionProcessor as MonologIntrospectionProcessor;
 use Monolog\Processor\ProcessorInterface as MonologProcessorInterface;

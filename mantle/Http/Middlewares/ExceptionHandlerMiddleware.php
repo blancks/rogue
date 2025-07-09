@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Http\Middlewares;
+namespace Mantle\Http\Middlewares;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Rogue\Mantle\Aspects\Response;
-use Rogue\Mantle\Http\Exceptions\HttpException;
-use Rogue\Mantle\Http\HttpStatus;
+use Mantle\Aspects\Response;
+use Mantle\Http\Exceptions\HttpException;
+use Mantle\Http\HttpStatus;
 use Throwable;
 
 /**

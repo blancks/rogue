@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Unit\Mantle\Events;
+namespace Test\Unit\Mantle\Events;
 
 use PHPUnit\Framework\TestCase;
-use Rogue\Mantle\Events\EventDispatcher;
+use Mantle\Events\EventDispatcher;
 
 class EventDispatcherTest extends TestCase
 {

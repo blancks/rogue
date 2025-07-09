@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Unit\Mantle\Routing\Attributes;
+namespace Test\Unit\Mantle\Routing\Attributes;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Rogue\Mantle\Http\HttpMethod;
-use Rogue\Mantle\Routing\Attributes\UnmaskedRoute;
+use Mantle\Http\HttpMethod;
+use Mantle\Routing\Attributes\UnmaskedRoute;
 
 class UnmaskedRouteTest extends TestCase
 {
@@ -44,7 +44,7 @@ class UnmaskedRouteTest extends TestCase
     {
         // Arrange
         $middlewares = ['one', 'two', 'three'];
-        $className = '\\Rogue\\Mantle\\Routing\\Attributes\\U'. ucwords(strtolower($method->value));
+        $className = '\\Mantle\\Routing\\Attributes\\U'. ucwords(strtolower($method->value));
 
         // Act + Asserts
         $this->assertTrue(class_exists($className), 'Attribute does not exist');

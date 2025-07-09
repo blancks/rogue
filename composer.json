@@ -1,15 +1,15 @@
 {
     "autoload": {
         "psr-4": {
-            "Rogue\\App\\": "app/",
-            "Rogue\\Mantle\\": "mantle/",
-            "Rogue\\Mask\\": "mask/",
-            "Rogue\\Plugin\\": "plugin/"
+            "App\\": "app/",
+            "Mantle\\": "mantle/",
+            "Mask\\": "mask/",
+            "Plugin\\": "plugin/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rogue\\Test\\": "test/"
+            "Test\\": "test/"
         }
     },
     "scripts": {

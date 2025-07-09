@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Contracts;
+namespace Mantle\Contracts;
 
 interface ContainerAwareInterface
 {

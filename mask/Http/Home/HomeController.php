@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mask\Http\Home;
+namespace Mask\Http\Home;
 
-use Rogue\Mantle\Routing\Attributes\UGet;
+use Mantle\Routing\Attributes\UGet;
 
 class HomeController
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Routing\Handlers;
+namespace Mantle\Routing\Handlers;
 
 use Closure;
 use JsonException;
@@ -10,8 +10,8 @@ use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Rogue\Mantle\Http\HttpStatus;
-use Rogue\Mantle\Http\Psr7\BasicStringStream;
+use Mantle\Http\HttpStatus;
+use Mantle\Http\Psr7\BasicStringStream;
 
 final class FinalRequestHandler implements RequestHandlerInterface
 {

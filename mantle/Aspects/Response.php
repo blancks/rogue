@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Aspects;
+namespace Mantle\Aspects;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use Rogue\Mantle\Contracts\Traits\SingletonTrait;
-use Rogue\Mantle\Http\HttpStatus;
+use Mantle\Contracts\Traits\SingletonTrait;
+use Mantle\Http\HttpStatus;
 
 /**
  * Singleton wrapper and utility for PSR-7 ResponseInterface.

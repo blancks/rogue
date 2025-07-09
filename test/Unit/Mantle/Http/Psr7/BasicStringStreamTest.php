@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Unit\Mantle\Http\Psr7;
+namespace Test\Unit\Mantle\Http\Psr7;
 
 use PHPUnit\Framework\TestCase;
-use Rogue\Mantle\Http\Psr7\BasicStringStream;
+use Mantle\Http\Psr7\BasicStringStream;
 
 class BasicStringStreamTest extends TestCase
 {

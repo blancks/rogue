@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Rogue\Mantle\Aspects\Container;
+use Mantle\Aspects\Container;
 
 if (!function_exists('autowire')) {
     /**

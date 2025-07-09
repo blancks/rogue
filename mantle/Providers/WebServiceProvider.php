@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Providers;
+namespace Mantle\Providers;
 
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use GuzzleHttp\Psr7\ServerRequest as GuzzleServerRequest;
-use Rogue\Mantle\Contracts\ServiceProviderInterface;
-use Rogue\Mantle\Aspects\Container;
-use Rogue\Mantle\Aspects\EventDispatcher;
-use Rogue\Mantle\Aspects\Logger;
-use Rogue\Mantle\Aspects\Request;
-use Rogue\Mantle\Aspects\Response;
-use Rogue\Mantle\Aspects\Router;
-use Rogue\Mantle\Events\EventDispatcher as EventsEventDispatcher;
-use Rogue\Mantle\Http\Middlewares\ExceptionHandlerMiddleware;
-use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcher;
-use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcherFactory;
-use Rogue\Mantle\Routing\UnmaskedRouteDiscovery;
-use Rogue\Mantle\Aspects\Debugger;
-use Rogue\Mantle\Containers\PhpDiContainer;
-use Rogue\Mantle\Debuggers\TracyDebugger;
-use Rogue\Mantle\Loggers\Monolog\Logger as MonologLogger;
-use Rogue\Mantle\Routing\Wrappers\FastRoute;
+use Mantle\Contracts\ServiceProviderInterface;
+use Mantle\Aspects\Container;
+use Mantle\Aspects\EventDispatcher;
+use Mantle\Aspects\Logger;
+use Mantle\Aspects\Request;
+use Mantle\Aspects\Response;
+use Mantle\Aspects\Router;
+use Mantle\Events\EventDispatcher as EventsEventDispatcher;
+use Mantle\Http\Middlewares\ExceptionHandlerMiddleware;
+use Mantle\Routing\Handlers\MiddlewareDispatcher;
+use Mantle\Routing\Handlers\MiddlewareDispatcherFactory;
+use Mantle\Routing\UnmaskedRouteDiscovery;
+use Mantle\Aspects\Debugger;
+use Mantle\Containers\PhpDiContainer;
+use Mantle\Debuggers\TracyDebugger;
+use Mantle\Loggers\Monolog\Logger as MonologLogger;
+use Mantle\Routing\Wrappers\FastRoute;
 
 /**
  * Class WebServiceProvider
@@ -77,10 +77,10 @@ final class WebServiceProvider implements ServiceProviderInterface // TODO: crea
         EventDispatcher::dispatch('mantle.booted');
 
         Router::routeDiscovery(
-            rootNamespace: 'Rogue\Mask\Http',
+            rootNamespace: 'Mask\Http',
             rootPath: dirname(__FILE__, 3) . '/mask/Http',
             namespacePaths: [
-                'Rogue\App\Http' => dirname(__FILE__, 3) . '/app/Http',
+                'App\Http' => dirname(__FILE__, 3) . '/app/Http',
             ]
         );
 

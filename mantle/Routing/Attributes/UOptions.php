@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Routing\Attributes;
+namespace Mantle\Routing\Attributes;
 
 use Attribute;
-use Rogue\Mantle\Http\HttpMethod;
+use Mantle\Http\HttpMethod;
 
 /**
  * Attribute for defining an unmasked HTTP OPTIONS route on a method.

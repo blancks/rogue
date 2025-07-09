@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Contracts\Traits;
+namespace Mantle\Contracts\Traits;
 
-use Rogue\Mantle\Contracts\ContainerInterface;
+use Mantle\Contracts\ContainerInterface;
 
 trait ContainerAwareTrait
 {

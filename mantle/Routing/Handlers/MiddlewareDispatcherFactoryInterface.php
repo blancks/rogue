@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Routing\Handlers;
+namespace Mantle\Routing\Handlers;
 
 use Closure;
 use Psr\Http\Server\MiddlewareInterface;

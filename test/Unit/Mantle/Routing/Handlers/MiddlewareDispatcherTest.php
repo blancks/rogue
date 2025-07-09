@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Unit\Mantle\Routing\Handlers;
+namespace Test\Unit\Mantle\Routing\Handlers;
 
 use PHPUnit\Framework\TestCase;
-use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcher;
+use Mantle\Routing\Handlers\MiddlewareDispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Rogue\Mantle\Contracts\ContainerInterface;
+use Mantle\Contracts\ContainerInterface;
 use ValueError;
 
 class MiddlewareDispatcherTest extends TestCase
@@ -18,8 +18,8 @@ class MiddlewareDispatcherTest extends TestCase
     public function testImplementsInterfaces(): void
     {
         $dispatcher = new MiddlewareDispatcher();
-        $this->assertInstanceOf(\Rogue\Mantle\Contracts\MiddlewareDispatcherInterface::class, $dispatcher);
-        $this->assertInstanceOf(\Rogue\Mantle\Contracts\ContainerAwareInterface::class, $dispatcher);
+        $this->assertInstanceOf(\Mantle\Contracts\MiddlewareDispatcherInterface::class, $dispatcher);
+        $this->assertInstanceOf(\Mantle\Contracts\ContainerAwareInterface::class, $dispatcher);
     }
 
     public function testHandleWithNoMiddlewareReturnsFinalHandlerResponse(): void

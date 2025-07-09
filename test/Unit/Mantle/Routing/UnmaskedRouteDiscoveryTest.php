@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Unit\Mantle\Routing;
+namespace Test\Unit\Mantle\Routing;
 
 use PHPUnit\Framework\TestCase;
 
@@ -33,9 +33,9 @@ class UnmaskedRouteDiscoveryTest extends TestCase
             <<<PHP
             <?php
                 namespace TestMaskNamespace2;
-                use Rogue\Mantle\Routing\Attributes\Route;
-                use Rogue\Mantle\Routing\Attributes\UnmaskedRoute;
-                use Rogue\Mantle\Http\HttpMethod;
+                use Mantle\Routing\Attributes\Route;
+                use Mantle\Routing\Attributes\UnmaskedRoute;
+                use Mantle\Http\HttpMethod;
 
                 class TestController {
                     #[Route(method: HttpMethod::GET, path: '/test')]
@@ -73,7 +73,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
     public function testDiscoversRouteAttribute(): void
     {
         // Arrange
-        $discovery = new \Rogue\Mantle\Routing\UnmaskedRouteDiscovery();
+        $discovery = new \Mantle\Routing\UnmaskedRouteDiscovery();
 
         // Act
         $foundRoute1Action = false;
@@ -83,14 +83,14 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         foreach ($routes as $route) {
             if (
                 $route['path'] === '/test'
-                && $route['method'] === \Rogue\Mantle\Http\HttpMethod::GET
+                && $route['method'] === \Mantle\Http\HttpMethod::GET
             ) {
                 $foundRoute1Action = $route['action'];
             }
 
             if (
                 $route['path'] === '/test/foo'
-                && $route['method'] === \Rogue\Mantle\Http\HttpMethod::GET
+                && $route['method'] === \Mantle\Http\HttpMethod::GET
             ) {
                 $foundRoute2Action = $route['action'];
             }
@@ -106,7 +106,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
     public function testDiscoversUnmaskedRouteAttribute(): void
     {
         // Arrange
-        $discovery = new \Rogue\Mantle\Routing\UnmaskedRouteDiscovery();
+        $discovery = new \Mantle\Routing\UnmaskedRouteDiscovery();
 
         // Act
         $foundRouteAction = false;
@@ -115,7 +115,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         foreach ($routes as $route) {
             if (
                 $route['path'] === '/unmasked'
-                && $route['method'] === \Rogue\Mantle\Http\HttpMethod::POST
+                && $route['method'] === \Mantle\Http\HttpMethod::POST
             ) {
                 $foundRouteAction = $route['action'];
                 break;
@@ -130,7 +130,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
     public function testDiscoversMultipleRouteAttributeOnSameClassMethod(): void
     {
         // Arrange
-        $discovery = new \Rogue\Mantle\Routing\UnmaskedRouteDiscovery();
+        $discovery = new \Mantle\Routing\UnmaskedRouteDiscovery();
 
         // Act
         $foundRoute1Action = false;
@@ -140,14 +140,14 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         foreach ($routes as $route) {
             if (
                 $route['path'] === '/test/foo'
-                && $route['method'] === \Rogue\Mantle\Http\HttpMethod::GET
+                && $route['method'] === \Mantle\Http\HttpMethod::GET
             ) {
                 $foundRoute1Action = $route['action'];
             }
 
             if (
                 $route['path'] === '/test/bar'
-                && $route['method'] === \Rogue\Mantle\Http\HttpMethod::GET
+                && $route['method'] === \Mantle\Http\HttpMethod::GET
             ) {
                 $foundRoute2Action = $route['action'];
             }
@@ -163,7 +163,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
     public function testUnmaskedRouteIsResolvedToAppNamespace(): void
     {
         // Arrange
-        $discovery = new \Rogue\Mantle\Routing\UnmaskedRouteDiscovery();
+        $discovery = new \Mantle\Routing\UnmaskedRouteDiscovery();
 
         // Act
         $foundRouteAction = false;
@@ -176,7 +176,7 @@ class UnmaskedRouteDiscoveryTest extends TestCase
         foreach ($routes as $route) {
             if (
                 $route['path'] === '/unmasked'
-                && $route['method'] === \Rogue\Mantle\Http\HttpMethod::POST
+                && $route['method'] === \Mantle\Http\HttpMethod::POST
             ) {
                 $foundRouteAction = $route['action'];
                 break;

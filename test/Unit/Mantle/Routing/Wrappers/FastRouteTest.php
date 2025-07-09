@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Unit\Mantle\Routing\Wrappers;
+namespace Test\Unit\Mantle\Routing\Wrappers;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rogue\Mantle\Routing\Wrappers\FastRoute;
-use Rogue\Mantle\Contracts\ContainerInterface;
-use Rogue\Mantle\Contracts\EventDispatcherInterface;
-use Rogue\Mantle\Contracts\RouteDiscoveryInterface;
-use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcherFactoryInterface;
-use Rogue\Mantle\Http\HttpMethod;
+use Mantle\Routing\Wrappers\FastRoute;
+use Mantle\Contracts\ContainerInterface;
+use Mantle\Contracts\EventDispatcherInterface;
+use Mantle\Contracts\RouteDiscoveryInterface;
+use Mantle\Routing\Handlers\MiddlewareDispatcherFactoryInterface;
+use Mantle\Http\HttpMethod;
 use FastRoute\Dispatcher;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -20,9 +20,9 @@ use ReflectionClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Rogue\Mantle\Aspects\Response;
-use Rogue\Mantle\Http\Exceptions\MethodNotAllowedException;
-use Rogue\Mantle\Http\HttpStatus;
+use Mantle\Aspects\Response;
+use Mantle\Http\Exceptions\MethodNotAllowedException;
+use Mantle\Http\HttpStatus;
 
 class FastRouteTest extends TestCase
 {
@@ -190,7 +190,7 @@ class FastRouteTest extends TestCase
         $request->method('getUri')->willReturn($this->getMockedUri('/notfound'));
 
         // Act + Assert
-        $this->expectException(\Rogue\Mantle\Http\Exceptions\NotFoundException::class);
+        $this->expectException(\Mantle\Http\Exceptions\NotFoundException::class);
         $this->fastRoute->handle($request);
     }
 

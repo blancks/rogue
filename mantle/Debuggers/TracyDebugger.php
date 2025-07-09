@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Debuggers;
+namespace Mantle\Debuggers;
 
 use LogicException;
-use Rogue\Mantle\Contracts\DebuggerInterface;
+use Mantle\Contracts\DebuggerInterface;
 
 /**
  * Tracy Debugger integration.

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Unit\Mantle\Routing\Handlers;
+namespace Test\Unit\Mantle\Routing\Handlers;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Rogue\Mantle\Routing\Handlers\FinalRequestHandler;
+use Mantle\Routing\Handlers\FinalRequestHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

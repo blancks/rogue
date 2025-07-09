@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Routing\Wrappers;
+namespace Mantle\Routing\Wrappers;
 
 use Closure;
 use FastRoute\Dispatcher;
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rogue\Mantle\Contracts\ContainerInterface;
-use Rogue\Mantle\Contracts\EventDispatcherInterface;
-use Rogue\Mantle\Contracts\RouteDiscoveryInterface;
-use Rogue\Mantle\Contracts\RouterInterface;
-use Rogue\Mantle\Http\Exceptions\MethodNotAllowedException;
-use Rogue\Mantle\Http\Exceptions\NotFoundException;
-use Rogue\Mantle\Http\HttpMethod;
-use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcherFactoryInterface;
+use Mantle\Contracts\ContainerInterface;
+use Mantle\Contracts\EventDispatcherInterface;
+use Mantle\Contracts\RouteDiscoveryInterface;
+use Mantle\Contracts\RouterInterface;
+use Mantle\Http\Exceptions\MethodNotAllowedException;
+use Mantle\Http\Exceptions\NotFoundException;
+use Mantle\Http\HttpMethod;
+use Mantle\Routing\Handlers\MiddlewareDispatcherFactoryInterface;
 
 /**
  * Class FastRoute

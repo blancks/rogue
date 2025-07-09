@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Contracts;
+namespace Mantle\Contracts;
 
 /**
  * Interface for logger processors that format or modify log records.

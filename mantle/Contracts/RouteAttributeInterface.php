@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Contracts;
+namespace Mantle\Contracts;
 
-use Rogue\Mantle\Http\HttpMethod;
+use Mantle\Http\HttpMethod;
 
 interface RouteAttributeInterface
 {

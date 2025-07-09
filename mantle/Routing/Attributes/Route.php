@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Routing\Attributes;
+namespace Mantle\Routing\Attributes;
 
 use Attribute;
-use Rogue\Mantle\Contracts\RouteAttributeInterface;
-use Rogue\Mantle\Http\HttpMethod;
+use Mantle\Contracts\RouteAttributeInterface;
+use Mantle\Http\HttpMethod;
 
 /**
  * Attribute for defining a generic HTTP route on a method.

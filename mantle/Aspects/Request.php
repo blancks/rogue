@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Aspects;
+namespace Mantle\Aspects;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
-use Rogue\Mantle\Contracts\Traits\SingletonTrait;
-use Rogue\Mantle\Http\HttpMethod;
+use Mantle\Contracts\Traits\SingletonTrait;
+use Mantle\Http\HttpMethod;
 
 /**
  * Singleton wrapper and utility for PSR-7 ServerRequestInterface.

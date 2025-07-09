@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Contracts;
+namespace Mantle\Contracts;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rogue\Mantle\Http\HttpMethod;
+use Mantle\Http\HttpMethod;
 
 /**
  * Interface RouterInterface

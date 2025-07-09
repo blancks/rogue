@@ -1,6 +1,6 @@
 <?php
 
-namespace Rogue\App\Http\Home;
+namespace App\Http\Home;
 
 class Test
 {

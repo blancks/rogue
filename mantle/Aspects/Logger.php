@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Aspects;
+namespace Mantle\Aspects;
 
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
-use Rogue\Mantle\Contracts\LoggerHandlerInterface;
-use Rogue\Mantle\Contracts\LoggerInterface;
-use Rogue\Mantle\Contracts\LoggerProcessorInterface;
-use Rogue\Mantle\Contracts\Traits\SingletonTrait;
+use Mantle\Contracts\LoggerHandlerInterface;
+use Mantle\Contracts\LoggerInterface;
+use Mantle\Contracts\LoggerProcessorInterface;
+use Mantle\Contracts\Traits\SingletonTrait;
 
 /**
  * Logger Aspect

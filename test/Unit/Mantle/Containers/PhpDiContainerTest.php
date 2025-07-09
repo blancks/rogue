@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Unit\Mantle\Containers;
+namespace Test\Unit\Mantle\Containers;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Container\NotFoundExceptionInterface;
-use Rogue\Mantle\Containers\PhpDiContainer;
+use Mantle\Containers\PhpDiContainer;
 
 class PhpDiContainerTest extends TestCase
 {

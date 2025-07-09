@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Events;
+namespace Mantle\Events;
 
-use Rogue\Mantle\Contracts\EventDispatcherInterface;
+use Mantle\Contracts\EventDispatcherInterface;
 
 /**
  * Class EventDispatcher

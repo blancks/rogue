@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Routing;
+namespace Mantle\Routing;
 
-use Rogue\Mantle\Contracts\RouteDiscoveryInterface;
-use Rogue\Mantle\Routing\Attributes\Route;
-use Rogue\Mantle\Routing\Attributes\UnmaskedRoute;
+use Mantle\Contracts\RouteDiscoveryInterface;
+use Mantle\Routing\Attributes\Route;
+use Mantle\Routing\Attributes\UnmaskedRoute;
 use Generator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionMethod;
-use Rogue\Mantle\Http\HttpMethod;
+use Mantle\Http\HttpMethod;
 
 /**
  * Discovers routes and unmasked routes in PHP classes within specified namespaces and directories.

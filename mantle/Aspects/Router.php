@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Aspects;
+namespace Mantle\Aspects;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rogue\Mantle\Contracts\RouterInterface;
-use Rogue\Mantle\Contracts\Traits\SingletonTrait;
-use Rogue\Mantle\Http\HttpMethod;
+use Mantle\Contracts\RouterInterface;
+use Mantle\Contracts\Traits\SingletonTrait;
+use Mantle\Http\HttpMethod;
 
 /**
  * Router

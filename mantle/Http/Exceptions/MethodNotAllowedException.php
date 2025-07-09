@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Http\Exceptions;
+namespace Mantle\Http\Exceptions;
 
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
-use Rogue\Mantle\Aspects\Response;
-use Rogue\Mantle\Http\HttpMethod;
-use Rogue\Mantle\Http\HttpStatus;
+use Mantle\Aspects\Response;
+use Mantle\Http\HttpMethod;
+use Mantle\Http\HttpStatus;
 
 class MethodNotAllowedException extends \RuntimeException implements HttpException
 {

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Routing\Handlers;
+namespace Mantle\Routing\Handlers;
 
 use Closure;
 use Psr\Http\Server\RequestHandlerInterface;
-use Rogue\Mantle\Aspects\Response;
-use Rogue\Mantle\Contracts\ContainerAwareInterface;
-use Rogue\Mantle\Contracts\ContainerInterface;
-use Rogue\Mantle\Contracts\MiddlewareDispatcherInterface;
+use Mantle\Aspects\Response;
+use Mantle\Contracts\ContainerAwareInterface;
+use Mantle\Contracts\ContainerInterface;
+use Mantle\Contracts\MiddlewareDispatcherInterface;
 
 /**
  * Implements a factory for creating middleware dispatcher instances.

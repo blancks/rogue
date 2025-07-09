@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rogue\App\Http\Home;
+namespace App\Http\Home;
 
-use Rogue\Mantle\Routing\Attributes\Get;
+use Mantle\Routing\Attributes\Get;
 
 class HomeController
 {

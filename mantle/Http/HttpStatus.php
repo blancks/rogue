@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Http;
+namespace Mantle\Http;
 
 /**
  * List of all official HTTP Status Code

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Test\Integration\Mantle\Routing\Handlers;
+namespace Test\Integration\Mantle\Routing\Handlers;
 
 use PHPUnit\Framework\TestCase;
-use Rogue\Mantle\Routing\Handlers\FinalRequestHandler;
-use Rogue\Mantle\Http\HttpStatus;
+use Mantle\Routing\Handlers\FinalRequestHandler;
+use Mantle\Http\HttpStatus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rogue\Mantle\Http\HttpMethod;
+use Mantle\Http\HttpMethod;
 
 class FinalRequestHandlerIntegrationTest extends TestCase
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Aspects;
+namespace Mantle\Aspects;
 
-use Rogue\Mantle\Contracts\ContainerInterface;
-use Rogue\Mantle\Contracts\Traits\SingletonTrait;
+use Mantle\Contracts\ContainerInterface;
+use Mantle\Contracts\Traits\SingletonTrait;
 use ValueError;
 
 /**

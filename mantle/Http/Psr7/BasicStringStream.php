@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rogue\Mantle\Http\Psr7;
+namespace Mantle\Http\Psr7;
 
 use Psr\Http\Message\StreamInterface;
 

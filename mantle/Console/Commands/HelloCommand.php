@@ -1,8 +1,8 @@
 <?php
 
-namespace Rogue\Mantle\Console\Commands;
+namespace Mantle\Console\Commands;
 
-use Rogue\Mantle\Console\CommandInterface;
+use Mantle\Console\CommandInterface;
 
 class HelloCommand implements CommandInterface
 {

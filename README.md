@@ -15,8 +15,8 @@ Suppose you have a core CMS built as your Mask Application. You want to let thir
 **1. Mask Application (core, untouched):**
 ```php
 // mask/Http/Home/HomeController.php
-namespace Rogue\Mask\Http\Home;
-use Rogue\Mantle\Routing\Attributes\UGet;
+namespace Mask\Http\Home;
+use Mantle\Routing\Attributes\UGet;
 
 class HomeController
 {
@@ -35,8 +35,8 @@ class HomeController
 **2. User Application (custom logic):**
 ```php
 // app/Http/Home/HomeController.php
-namespace Rogue\App\Http\Home;
-use Rogue\Mantle\Routing\Attributes\Get;
+namespace App\Http\Home;
+use Mantle\Routing\Attributes\Get;
 
 class HomeController
 {
@@ -64,7 +64,7 @@ With this approach, Rogue automatically prioritizes the custom controller when a
 This ensures that customizations and core updates remain isolated while third-party logic can be added, replaced, or removed independently. This flexible separation streamlines both maintenance and extensibility for all parties.
 
 > 🚨 **Note:**
-> * For unmasked routing to work, the application controller inside the `Rogue\App` namespace must use the same FQCN you want to extend or replace under `Rogue\Mask`, except for the `App` segment of course.
+> * For unmasked routing to work, the application controller inside the `App` namespace must use the same FQCN you want to extend or replace under `Mask`, except for the `App` segment of course.
 > * Routes intended to be unmasked must use the appropriate `UnmaskedRoute` attribute (such as `UGet`, `UPost`, etc.) in the Mask controllers. This ensures Rogue can correctly substitute the custom logic in place of the core implementation.
 > * If you want to build completely new endpoints, this requirement does not apply: you are free to define new controllers and routes as needed.
 
@@ -150,8 +150,8 @@ You can also bind custom implementations or singletons to the container for more
 * [ ] Plugins
     * [ ] ServiceProvider
 * [ ] Custom Service Providers
-    * [ ] Rogue\App\Providers
-    * [ ] Rogue\Mask\Providers
+    * [ ] App\Providers
+    * [ ] Mask\Providers
 * [ ] Improve Console (dagger) Commands
     * [ ] Helpers
         * [ ] ProgressBar

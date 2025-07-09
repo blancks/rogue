@@ -1,6 +1,6 @@
 <?php
 
-namespace Rogue\Mantle\Console;
+namespace Mantle\Console;
 
 interface CommandInterface
 {
