@@ -18,13 +18,10 @@ use Rogue\Mantle\Http\Middlewares\ExceptionHandlerMiddleware;
 use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcher;
 use Rogue\Mantle\Routing\Handlers\MiddlewareDispatcherFactory;
 use Rogue\Mantle\Routing\UnmaskedRouteDiscovery;
-use Monolog\Logger as MonologLogger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Level;
-use Psr\Log\LoggerInterface;
 use Rogue\Mantle\Aspects\Debugger;
 use Rogue\Mantle\Containers\PhpDiContainer;
 use Rogue\Mantle\Debuggers\TracyDebugger;
+use Rogue\Mantle\Loggers\Monolog\Logger as MonologLogger;
 use Rogue\Mantle\Routing\Wrappers\FastRoute;
 
 /**
@@ -46,7 +43,7 @@ final class WebServiceProvider implements ServiceProviderInterface // TODO: crea
         Debugger::setInstance(new TracyDebugger());
         Debugger::init();
 
-        Logger::setInstance($this->getMonologInstance());
+        Logger::setInstance(new MonologLogger());
         Container::setInstance(new PhpDiContainer());
         EventDispatcher::setInstance(new EventsEventDispatcher());
         Request::setInstance(GuzzleServerRequest::fromGlobals());
@@ -91,12 +88,5 @@ final class WebServiceProvider implements ServiceProviderInterface // TODO: crea
         Response::send($response);
 
         EventDispatcher::dispatch('rogue.booted');
-    }
-
-    private function getMonologInstance(): LoggerInterface
-    {
-        $monolog = new MonologLogger('app');
-        $monolog->pushHandler(new StreamHandler(logsPath('app.log'), Level::Debug));
-        return $monolog;
     }
 }
