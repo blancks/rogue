@@ -166,6 +166,7 @@ class Logger implements LoggerInterface
             $discreteProcessor instanceof MonologProcessorInterface
                 ? $discreteProcessor
                 : function (LogRecord $record) use ($discreteProcessor): LogRecord {
+                    /** @var array{message: string, context: array<mixed>, extra: array<mixed>, formatted: string} $processedData */
                     $processedData = $discreteProcessor($record->toArray());
                     return new LogRecord(
                         $record->datetime,
