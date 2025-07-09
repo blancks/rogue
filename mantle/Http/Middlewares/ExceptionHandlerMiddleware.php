@@ -39,11 +39,11 @@ final class ExceptionHandlerMiddleware implements MiddlewareInterface
 
             $response = $e->getResponse() ?? Response::withStatus($e->getHttpStatus()); // TODO: inject dependency
 
-        } catch (Throwable $e) {
+        } /*catch (Throwable $e) {
 
             $response = Response::withStatus(HttpStatus::INTERNAL_SERVER_ERROR);
 
-        }
+        }*/
 
         return $response;
     }

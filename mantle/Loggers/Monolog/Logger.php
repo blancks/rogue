@@ -165,8 +165,18 @@ class Logger implements LoggerInterface
         $this->loggers[$channel]->pushProcessor(
             $discreteProcessor instanceof MonologProcessorInterface
                 ? $discreteProcessor
-                : fn (LogRecord $record): LogRecord =>
-                    $record->with($discreteProcessor($record->toArray()))
+                : function (LogRecord $record) use ($discreteProcessor): LogRecord {
+                    $processedData = $discreteProcessor($record->toArray());
+                    return new LogRecord(
+                        $record->datetime,
+                        $record->channel,
+                        $record->level,
+                        $processedData['message'] ?? $record->message,
+                        $processedData['context'] ?? $record->context,
+                        $processedData['extra'] ?? $record->extra,
+                        $processedData['formatted'] ?? $record->formatted
+                    );
+                }
         );
     }
 
@@ -235,7 +245,7 @@ class Logger implements LoggerInterface
      */
     private function validateChannelName(string $channel): string
     {
-        if (preg_match('#^[a-z0-9/_-]+$#i', $channel) === false) {
+        if (preg_match('#^[a-z0-9/_-]+$#i', $channel) !== 1) {
             throw new ValueError('Invalid channel name: '. $channel);
         }
 
