@@ -13,7 +13,7 @@
         }
     },
     "scripts": {
-        "prettify": "php-cs-fixer fix --config ./config/php-cs-fixer/.php-cs-fixer.dist.php --cache-file ./storage/cache/.php-cs-fixer.cache",
+        "prettify": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --config ./config/php-cs-fixer/.php-cs-fixer.dist.php --cache-file ./storage/cache/.php-cs-fixer.cache",
         "analyse": " phpstan analyse --configuration phpstan.neon",
         "serve": "php -S 127.0.0.1:80 ./mantle/Dev/builtin-webserver-router.php",
         "test": "phpunit --bootstrap ./mantle/bootstrap.php --colors=always test",
