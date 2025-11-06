@@ -1,6 +1,9 @@
 # Rogue
 
-> 🚨 **Note:** This project is in early development.
+> [!IMPORTANT]
+> I've recently discovered the existence of [TempestPHP](https://github.com/tempestphp) which share one of the development goal of this project which was the auto-discovery of the components.
+> That said <ins>this project is officially archived</ins> as I will pursue my goals by learning and using Tempest instead. 
+
 
 Rogue is a PHP framework designed to enable the creation of a main application, called the **Mask Application**, which serves as a base project. This architecture allows you to build core projects (such as a CMS) that can be easily extended with custom application logic, without modifying the original codebase.
 
